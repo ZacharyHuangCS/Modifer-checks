@@ -1,0 +1,10 @@
+DELETE FROM Likes
+WHERE ID1 IN (
+    SELECT L1.ID1
+    FROM Likes L1
+    JOIN Friend F ON L1.ID1 = F.ID1 AND L1.ID2 = F.ID2
+) AND ID2 NOT IN (
+    SELECT L2.ID1
+    FROM Likes L2
+    WHERE L2.ID2 = Likes.ID1
+);
